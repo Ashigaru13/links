@@ -1,0 +1,618 @@
+/* style.css — ORION tactical link map
+   Same identity as the stream overlays (radar/terrain/waypoints), rebuilt
+   as the page's central interaction instead of a plain list. */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Black+Ops+One&family=Rajdhani:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg: #05080a;
+  --panel: #0c130f;
+  --hud: #7dffab;
+  --hud-dim: #3d6b4d;
+  --amber: #ffb454;
+  --text: #d8f5df;
+  --muted: #4d6e58;
+  --line: rgba(125, 255, 171, 0.14);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  min-height: 100vh;
+  position: relative;
+  cursor: none;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+::selection {
+  background: rgba(125, 255, 171, 0.25);
+  color: #fff;
+}
+
+/* ── custom cursor ── */
+#cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--hud);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 12px var(--hud);
+  mix-blend-mode: screen;
+  opacity: 0;
+}
+
+#cursorRing {
+  position: fixed;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(125, 255, 171, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width .2s ease, height .2s ease, border-color .2s ease, left .08s ease, top .08s ease;
+  opacity: 0;
+}
+
+/* ── page chrome (grid / scanlines / vignette / frame) ── */
+/* Any full-page ambient background canvas uses this id — needed here
+   (not just in boot.css) since schedule.html and future subpages load
+   this stylesheet but not boot.css. Without it the canvas has no CSS
+   sizing and renders in normal flow at its full pixel dimensions,
+   pushing all page content off-screen below it. */
+canvas#bgcanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(125, 255, 171, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 255, 171, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(125, 255, 171, 0.02) 3px, rgba(125, 255, 171, 0.02) 4px);
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: inset 0 0 280px 90px rgba(1, 2, 2, 0.82);
+}
+
+.corner {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.corner svg {
+  width: 100%;
+  height: 100%;
+}
+
+.corner.tl {
+  top: 22px;
+  left: 22px;
+}
+
+.corner.tr {
+  top: 22px;
+  right: 22px;
+  transform: scaleX(-1);
+}
+
+.corner.bl {
+  bottom: 22px;
+  left: 22px;
+  transform: scaleY(-1);
+}
+
+.corner.br {
+  bottom: 22px;
+  right: 22px;
+  transform: scale(-1, -1);
+}
+
+.side-label {
+  position: fixed;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  opacity: 0.4;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.side-label--left {
+  left: 34px;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.side-label--right {
+  right: 34px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width:760px) {
+  .side-label {
+    display: none;
+  }
+}
+
+/* ── header ── */
+.hero {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 56px 24px 8px;
+}
+
+#hud-top {
+  position: absolute;
+  top: 30px;
+  left: 80px;
+  right: 80px;
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+#hud-top .block {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#hud-top .block.right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+#hud-top .k {
+  color: var(--hud-dim);
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+}
+
+#hud-top .v {
+  color: var(--hud);
+  font-size: 13px;
+}
+
+#hud-top .v.amber {
+  color: var(--amber);
+}
+
+@media (max-width:760px) {
+  #hud-top {
+    display: none;
+  }
+}
+
+#brandline {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  color: var(--hud);
+  text-shadow: 0 0 12px rgba(125, 255, 171, 0.5);
+  margin-bottom: 18px;
+}
+
+#title {
+  font-family: 'Black Ops One', sans-serif;
+  font-size: clamp(48px, 9vw, 104px);
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1;
+  animation: titleGlow 3.2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+
+  0%,
+  100% {
+    text-shadow: 0 0 20px rgba(125, 255, 171, 0.32), 0 0 2px rgba(216, 245, 223, 0.4);
+  }
+
+  50% {
+    text-shadow: 0 0 54px rgba(125, 255, 171, 0.62), 0 0 2px rgba(216, 245, 223, 0.4);
+  }
+}
+
+#subline {
+  margin-top: 16px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(11px, 1.4vw, 14px);
+  letter-spacing: 0.26em;
+  text-indent: 0.26em;
+  color: var(--muted);
+}
+
+.blink {
+  display: inline-block;
+  width: 9px;
+  color: var(--hud);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ── tactical map ── */
+.map-section {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 8px;
+}
+
+.map-frame {
+  position: relative;
+  width: min(94vw, 980px);
+  aspect-ratio: 16/11;
+  border: 1px solid var(--line);
+  background: rgba(6, 10, 8, 0.4);
+}
+
+.map-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(125, 255, 171, 0.06);
+  margin: 10px;
+  pointer-events: none;
+}
+
+canvas#mapcanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* readout panel, top-left inside the frame */
+#wpReadout {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  z-index: 25;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: rgba(5, 8, 10, 0.55);
+  padding: 10px 14px;
+  border-left: 2px solid var(--hud-dim);
+  min-width: 190px;
+  pointer-events: none;
+  transition: border-color .2s ease;
+}
+
+#wpReadout.active {
+  border-left-color: var(--hud);
+}
+
+#wpReadout .row {
+  display: flex;
+  gap: 10px;
+}
+
+#wpReadout .k {
+  color: var(--hud-dim);
+  min-width: 74px;
+  letter-spacing: 0.14em;
+}
+
+#wpReadout .v {
+  color: var(--hud);
+}
+
+#wpReadout .v.amber {
+  color: var(--amber);
+}
+
+@media (max-width:600px) {
+  #wpReadout {
+    display: none;
+  }
+}
+
+/* legend, bottom-right inside the frame */
+#legend {
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+  z-index: 25;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+#legend .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 8px rgba(255, 180, 84, 0.7);
+}
+
+@media (max-width:600px) {
+  #legend {
+    display: none;
+  }
+}
+
+/* waypoints */
+.waypoint {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text);
+  z-index: 30;
+}
+
+.wp-marker {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--hud-dim);
+  background: rgba(12, 19, 15, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease, background .25s ease;
+}
+
+.wp-marker i {
+  font-size: 17px;
+  color: var(--hud);
+  transition: color .25s ease;
+}
+
+.waypoint:hover .wp-marker {
+  border-color: var(--hud);
+  box-shadow: 0 0 18px rgba(125, 255, 171, 0.45);
+  background: rgba(125, 255, 171, 0.08);
+  transform: scale(1.14);
+}
+
+.wp-id {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  color: var(--hud-dim);
+  margin-top: 7px;
+  white-space: nowrap;
+}
+
+.wp-tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: rgba(6, 10, 8, 0.94);
+  border: 1px solid var(--line);
+  padding: 7px 12px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: var(--hud);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.wp-tooltip span {
+  color: var(--muted);
+}
+
+.waypoint:hover .wp-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.wp-tag {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  border: 1px solid currentColor;
+}
+
+.wp-tag.active {
+  color: var(--hud);
+  background: rgba(125, 255, 171, 0.1);
+}
+
+.wp-tag.inactive {
+  color: var(--amber);
+  background: rgba(255, 180, 84, 0.1);
+}
+
+/* always-visible status dot on the marker itself, like a live indicator light */
+.wp-status-dot {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--bg);
+  z-index: 2;
+}
+
+.wp-status-dot.active {
+  background: var(--hud);
+  box-shadow: 0 0 6px rgba(125, 255, 171, 0.8);
+}
+
+.wp-status-dot.inactive {
+  background: var(--amber);
+  box-shadow: 0 0 6px rgba(255, 180, 84, 0.8);
+}
+
+.waypoint.live .wp-marker {
+  border-color: var(--amber);
+}
+
+.waypoint.live .wp-marker i {
+  color: var(--amber);
+}
+
+.wp-live-ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px solid var(--amber);
+  animation: liveRingPulse 2s ease-in-out infinite;
+}
+
+@keyframes liveRingPulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+/* disabled waypoints stay dimmed at rest but highlight exactly like an active
+   waypoint on hover — visible and explorable on the board, just not clickable */
+.waypoint.disabled {
+  cursor: none;
+}
+
+.waypoint.disabled .wp-marker {
+  opacity: 0.55;
+}
+
+.waypoint.disabled:hover .wp-marker {
+  opacity: 1;
+  border-color: var(--hud);
+  box-shadow: 0 0 18px rgba(125, 255, 171, 0.45);
+  background: rgba(125, 255, 171, 0.08);
+  transform: scale(1.14);
+}
+
+.waypoint.disabled .wp-id {
+  opacity: 0.55;
+}
+
+.waypoint.disabled:hover .wp-id {
+  opacity: 1;
+}
+
+@media (max-width:600px) {
+  .wp-marker {
+    width: 38px;
+    height: 38px;
+  }
+
+  .wp-marker i {
+    font-size: 14px;
+  }
+
+  .wp-id {
+    font-size: 8.5px;
+  }
+}
+
+/* ── footer ── */
+.footer {
+  position: relative;
+  z-index: 10;
+  padding: 22px 24px 30px;
+  text-align: center;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: rgba(77, 110, 88, 0.6);
+  text-transform: uppercase;
+}
+
+.footer a {
+  color: rgba(125, 255, 171, 0.55);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--hud);
+}

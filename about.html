@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orion — Field Dossier</title>
+
+    <link rel="icon" href="Images/icon.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="Images/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Black+Ops+One&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="Styles/style.css">
+    <link rel="stylesheet" href="Styles/about.css">
+
+    <meta property="og:title" content="Orion — Field Dossier">
+    <meta property="og:description" content="Just some guy who likes games.">
+    <meta property="og:type" content="website">
+</head>
+
+<body>
+
+    <div id="cursor"></div>
+    <div id="cursorRing"></div>
+
+    <canvas id="bgcanvas"></canvas>
+    <div class="grid-overlay"></div>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+
+    <div class="side-label side-label--left">ORION FIELD LOG ░ PERSONNEL FILE</div>
+    <div class="side-label side-label--right">CLEARANCE REQUIRED: NONE</div>
+
+    <div class="corner tl"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+    <div class="corner tr"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+    <div class="corner bl"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+    <div class="corner br"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+
+    <div class="about-wrap">
+
+        <header class="about-hero">
+            <div class="about-brandline">FIELD FEED</div>
+            <h1 class="about-title">About</h1>
+            <p class="about-sub">personnel file — orion</p>
+        </header>
+
+        <div class="dossier-panel">
+            <span class="dossier-bracket db-tl"></span>
+            <span class="dossier-bracket db-tr"></span>
+            <span class="dossier-bracket db-bl"></span>
+            <span class="dossier-bracket db-br"></span>
+
+            <div class="dossier-screen">
+                <div class="section-label">// Field Log</div>
+
+                <div class="about-body">
+                    <p>Hey, I'm Orion.</p>
+                    <p>I am VSM's 3rd streamer.<br>I make stream on whatever game I'm into at the time — could be anything, no fixed genre.<br>Some sessions are chill, some are chaotic. <strong>Depends on the op.</strong></p>
+                    <p>Upload schedule is loose — I stream on weekends mainly (FRI, SAT). See <strong>schedule</strong> page for more details.</p>
+                    <p>If you're into random gaming content, welcome aboard.</p>
+                </div>
+
+                <div class="readout">
+                    <div class="readout-row"><span class="readout-k">Callsign</span><span class="readout-v">ORION-6</span></div>
+                    <div class="readout-row"><span class="readout-k">Status</span><span class="readout-v"><span class="status-live-dot"></span>Active</span></div>
+                    <div class="readout-row"><span class="readout-k">Role</span><span class="readout-v dim">Streamer / Creator</span></div>
+                    <div class="readout-row"><span class="readout-k">Comms</span><span class="readout-v dim">Twitch &amp; YouTube</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dossier-panel">
+            <span class="dossier-bracket db-tl"></span>
+            <span class="dossier-bracket db-tr"></span>
+            <span class="dossier-bracket db-bl"></span>
+            <span class="dossier-bracket db-br"></span>
+
+            <div class="dossier-screen">
+                <div class="section-label">// Personnel / Credits</div>
+
+                <table class="credits-table">
+                    <tbody>
+                        <tr>
+                            <td>Design &amp; Dev</td>
+                            <td>
+                                <a class="credit-name" href="https://kill3rkai.ai" target="_blank" rel="noopener">Kill3rKai</a>
+                                <span class="credit-sub">Website Design &amp; Development</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="about-back">
+            <a href="main.html">RTB</a>
+        </div>
+
+        <footer class="about-footer">
+            // ORION &nbsp;·&nbsp; FIELD FEED &nbsp;·&nbsp; 2026
+        </footer>
+
+    </div>
+
+    <script src="Scripts/about.js" defer></script>
+
+</body>
+
+</html>

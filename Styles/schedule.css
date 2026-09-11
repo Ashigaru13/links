@@ -1,0 +1,563 @@
+/* ============================================================
+   schedule.css — ORION ops calendar
+   Extends Styles/style.css — tokens (--hud, --amber, --muted etc)
+   are inherited from there. This page scrolls, unlike main.html's
+   fixed map viewport.
+   ============================================================ */
+
+body {
+    display: block;
+    min-height: 100vh;
+    height: auto;
+    overflow: visible auto;
+    padding: 96px 20px 60px;
+}
+
+.sched-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+/* ── header ── */
+.sched-hero {
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.sched-brandline {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    text-indent: 0.5em;
+    color: var(--hud);
+    text-shadow: 0 0 12px rgba(125, 255, 171, 0.5);
+    margin-bottom: 14px;
+}
+
+.sched-title {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: clamp(38px, 7vw, 64px);
+    letter-spacing: 0.04em;
+    color: var(--text);
+    line-height: 1;
+    animation: titleGlow 3.2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 20px rgba(125, 255, 171, 0.32), 0 0 2px rgba(216, 245, 223, 0.4);
+    }
+
+    50% {
+        text-shadow: 0 0 54px rgba(125, 255, 171, 0.62), 0 0 2px rgba(216, 245, 223, 0.4);
+    }
+}
+
+.sched-sub {
+    margin-top: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* ── ticker / comms readout ── */
+.ticker {
+    max-width: 640px;
+    margin: 0 auto 20px;
+    background: rgba(12, 19, 15, 0.5);
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--hud-dim);
+    padding: 12px 16px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.03em;
+    color: var(--hud);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.ticker-prompt {
+    color: var(--hud-dim);
+    flex-shrink: 0;
+}
+
+.ticker-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ticker-cursor {
+    display: inline-block;
+    color: var(--hud);
+    flex-shrink: 0;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* ── ops panel shell ── */
+.ops-panel {
+    max-width: 640px;
+    margin: 0 auto;
+    background: rgba(6, 10, 8, 0.55);
+    border: 1px solid var(--line);
+    padding: 20px 18px 30px;
+    position: relative;
+}
+
+.ops-bracket {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--hud-dim);
+    border-style: solid;
+    pointer-events: none;
+}
+
+.ops-tl {
+    top: 8px;
+    left: 8px;
+    border-width: 1px 0 0 1px;
+}
+
+.ops-tr {
+    top: 8px;
+    right: 8px;
+    border-width: 1px 1px 0 0;
+}
+
+.ops-bl {
+    bottom: 8px;
+    left: 8px;
+    border-width: 0 0 1px 1px;
+}
+
+.ops-br {
+    bottom: 8px;
+    right: 8px;
+    border-width: 0 1px 1px 0;
+}
+
+.ops-label {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    opacity: 0.7;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+/* ── screen ── */
+.ops-screen {
+    position: relative;
+    padding: 8px 6px 4px;
+    animation: panelOn .5s ease both;
+}
+
+@keyframes panelOn {
+    0% {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── header / nav ── */
+.cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.cal-title {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    text-shadow: 0 0 12px rgba(125, 255, 171, 0.35);
+}
+
+.cal-nav-btn {
+    width: 30px;
+    height: 30px;
+    background: rgba(125, 255, 171, 0.05);
+    border: 1px solid var(--line);
+    color: var(--hud);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.cal-nav-btn:hover {
+    background: rgba(125, 255, 171, 0.12);
+    border-color: var(--hud);
+    box-shadow: 0 0 12px rgba(125, 255, 171, 0.3);
+}
+
+/* ── weekdays ── */
+.cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--hud-dim);
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+/* ── grid ── */
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.cal-cell {
+    aspect-ratio: 1;
+    border: 1px solid rgba(125, 255, 171, 0.08);
+    background: rgba(255, 255, 255, 0.01);
+    padding: 5px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--muted);
+    position: relative;
+    overflow: hidden;
+    transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+
+.cal-cell.other-month {
+    opacity: 0.2;
+}
+
+.cal-cell.is-today {
+    border-color: var(--hud);
+    box-shadow: 0 0 10px rgba(125, 255, 171, 0.25), inset 0 0 10px rgba(125, 255, 171, 0.06);
+}
+
+.cal-cell.is-today .cal-daynum {
+    color: var(--hud);
+}
+
+.cal-cell.has-event {
+    border-color: var(--hud-dim);
+    background: rgba(125, 255, 171, 0.03);
+}
+
+.cal-cell.has-event:hover {
+    transform: translateY(-2px);
+    border-color: var(--hud);
+    box-shadow: 0 6px 16px rgba(125, 255, 171, 0.18);
+    background: rgba(125, 255, 171, 0.07);
+}
+
+.cal-daynum {
+    font-size: 11px;
+    font-weight: 600;
+    align-self: flex-end;
+}
+
+.cal-pill {
+    margin-top: auto;
+    font-size: 10.5px;
+    font-weight: 600;
+    line-height: 1.3;
+    padding: 3px 5px;
+    background: rgba(125, 255, 171, 0.1);
+    color: var(--hud);
+    border: 1px solid rgba(125, 255, 171, 0.28);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+}
+
+.cal-pill.is-live {
+    background: rgba(255, 180, 84, 0.12);
+    color: var(--amber);
+    border-color: rgba(255, 180, 84, 0.4);
+}
+
+.cal-pill-more {
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.cal-pill-mask {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.cal-pill-mask.marquee {
+    mask-image: linear-gradient(90deg, transparent 0, #000 6px, #000 calc(100% - 6px), transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6px, #000 calc(100% - 6px), transparent 100%);
+}
+
+.cal-pill-label {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.cal-pill-mask.marquee .cal-pill-label {
+    animation: pillMarquee var(--marquee-duration, 6s) ease-in-out infinite;
+}
+
+@keyframes pillMarquee {
+
+    0%,
+    15% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(var(--marquee-dist, 0));
+    }
+
+    85%,
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.cal-live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--amber);
+    box-shadow: 0 0 6px var(--amber);
+    animation: liveDotPulse 1.5s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes liveDotPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+}
+
+/* ── legend ── */
+.cal-legend {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    gap: 18px;
+    align-items: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+}
+
+.legend-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    opacity: 0.75;
+}
+
+.legend-hint i {
+    color: var(--hud-dim);
+    font-size: 11px;
+}
+
+.legend-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: inherit;
+    text-decoration: none;
+    transition: color .2s ease, text-shadow .2s ease;
+}
+
+.legend-link:hover {
+    color: #9146ff;
+    text-shadow: 0 0 8px rgba(145, 70, 255, 0.5);
+}
+
+/* ── detail popup ── */
+.cal-detail-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 8, 10, 0.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    padding: 20px;
+}
+
+.cal-detail-backdrop.open {
+    display: flex;
+}
+
+.cal-detail {
+    width: 100%;
+    max-width: 320px;
+    background: rgba(9, 15, 12, 0.95);
+    border: 1px solid var(--hud-dim);
+    animation: detailIn .2s ease both;
+}
+
+@keyframes detailIn {
+    from {
+        opacity: 0;
+        transform: scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.cal-detail-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 15px;
+    border-bottom: 1px solid var(--line);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--hud);
+    text-transform: uppercase;
+}
+
+.cal-detail-close {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 14px;
+    transition: color .2s ease;
+}
+
+.cal-detail-close:hover {
+    color: var(--amber);
+}
+
+.cal-detail-body {
+    padding: 14px 15px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+.cal-detail-entry {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(125, 255, 171, 0.06);
+}
+
+.cal-detail-entry:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.cal-detail-icon {
+    font-size: 17px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.cal-detail-game {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.02em;
+}
+
+.cal-detail-time {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.cal-detail-note {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+/* ── footer ── */
+.sched-footer {
+    text-align: center;
+    margin-top: 28px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.24em;
+    color: rgba(77, 110, 88, 0.55);
+    text-transform: uppercase;
+}
+
+.sched-footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.sched-footer a:hover {
+    color: var(--hud);
+}
+
+@media (max-width:480px) {
+    body {
+        padding: 80px 14px 40px;
+    }
+
+    .cal-daynum {
+        font-size: 9.5px;
+    }
+
+    .cal-pill {
+        font-size: 9px;
+        padding: 2px 4px;
+    }
+}
