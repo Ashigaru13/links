@@ -1,9 +1,8 @@
 // ── PAGE CHROME — cursor + ambient terrain/radar background ──
-// Same self-contained pattern used on schedule.js (this page doesn't
-// load Scripts/main.js, which is wired specifically to the waypoint map).
+// Same self-contained pattern used on schedule.js.
 (function () {
   const cursor = document.getElementById('cursor');
-  const ring   = document.getElementById('cursorRing');
+  const ring = document.getElementById('cursorRing');
   let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0, ready = false;
 
   document.addEventListener('mousemove', e => {
@@ -13,13 +12,13 @@
       cursor.style.opacity = '1'; ring.style.opacity = '1';
     }
     cursor.style.left = mouseX + 'px';
-    cursor.style.top  = mouseY + 'px';
+    cursor.style.top = mouseY + 'px';
   });
   (function animateRing() {
     ringX += (mouseX - ringX) * 0.14;
     ringY += (mouseY - ringY) * 0.14;
     ring.style.left = ringX + 'px';
-    ring.style.top  = ringY + 'px';
+    ring.style.top = ringY + 'px';
     requestAnimationFrame(animateRing);
   })();
   document.querySelectorAll('a, button').forEach(el => {
@@ -76,24 +75,6 @@
   }
   function drawTerrain() { terrain.forEach(p => contourCluster(p.cx, p.cy, p.baseR, p.rings, p.seed, p.gap)); }
 
-  function drawRadar(t) {
-    const cx = W / 2, cy = H * 0.35, r = Math.max(W, H) * 0.5;
-    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(125,255,171,0.07)'; ctx.lineWidth = 1; ctx.stroke();
-    const angle = (t * 0.01) % (Math.PI * 2);
-    let fillStyle = 'rgba(125,255,171,0.05)';
-    if (ctx.createConicGradient) {
-      const grad = ctx.createConicGradient(angle, cx, cy);
-      grad.addColorStop(0, 'rgba(125,255,171,0.12)');
-      grad.addColorStop(0.1, 'rgba(125,255,171,0)');
-      grad.addColorStop(1, 'rgba(125,255,171,0)');
-      fillStyle = grad;
-    }
-    ctx.beginPath(); ctx.moveTo(cx, cy);
-    ctx.arc(cx, cy, r, angle, angle + 0.5); ctx.closePath();
-    ctx.fillStyle = fillStyle; ctx.fill();
-  }
-
   let glitchUntil = 0;
   function scheduleGlitch() { setTimeout(() => { glitchUntil = performance.now() + 150; scheduleGlitch(); }, 18000 + Math.random() * 22000); }
   scheduleGlitch();
@@ -112,14 +93,34 @@
   window.addEventListener('resize', resize);
   resize();
 
-  let t = 0;
   function animate() {
-    t++;
     ctx.clearRect(0, 0, W, H);
     drawTerrain();
-    drawRadar(t);
     drawGlitch();
     requestAnimationFrame(animate);
   }
   animate();
+})();
+
+// ── LIVE "LAST ACTIVITY" STAMP ──
+(function () {
+  const el = document.getElementById('lastActivity');
+  if (!el) return;
+  const n = new Date();
+  el.textContent = n.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+})();
+
+// ── METRIC BARS — fill in once the panel is on screen ──
+(function () {
+  const bars = document.querySelectorAll('.metric-fill');
+  if (!bars.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      setTimeout(() => { el.style.width = el.dataset.w + '%'; }, 200);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.3 });
+  bars.forEach((b) => io.observe(b));
 })();
