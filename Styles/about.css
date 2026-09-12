@@ -1,8 +1,8 @@
 /* ============================================================
-   about.css — ORION field dossier
-   Extends Styles/style.css — tokens (--hud, --amber, --muted etc)
-   are inherited from there. Scrolling page, same pattern as
-   schedule.css.
+   about.css — ORION personnel file
+   A pulled-up dossier screen: ID photo, stat readouts, a
+   classification ticker, animated metric bars. Extends
+   Styles/style.css for shared tokens.
    ============================================================ */
 
 body {
@@ -10,20 +10,22 @@ body {
     min-height: 100vh;
     height: auto;
     overflow: visible auto;
-    padding: 96px 20px 60px;
+    padding: 0 0 60px;
 }
 
 .about-wrap {
-    max-width: 720px;
+    max-width: 820px;
     margin: 0 auto;
     position: relative;
     z-index: 10;
+    padding: 0 20px;
 }
 
 /* ── header ── */
 .about-hero {
     text-align: center;
-    margin-bottom: 26px;
+    margin-bottom: 30px;
+    padding-top: 64px;
 }
 
 .about-brandline {
@@ -66,13 +68,13 @@ body {
     color: var(--muted);
 }
 
-/* ── dossier panel shell (shared by both panels on the page) ── */
+/* ── dossier panel shell ── */
 .dossier-panel {
-    max-width: 640px;
+    max-width: 760px;
     margin: 0 auto 22px;
     background: rgba(6, 10, 8, 0.55);
     border: 1px solid var(--line);
-    padding: 26px 26px 28px;
+    padding: 28px;
     position: relative;
 }
 
@@ -132,52 +134,138 @@ body {
     text-indent: 0.28em;
     color: var(--hud-dim);
     text-transform: uppercase;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--line);
 }
 
-/* ── bio text ── */
-.about-body p {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 16px;
-    line-height: 1.75;
-    color: var(--text);
-    opacity: 0.88;
-    margin-bottom: 13px;
+/* ── profile grid: photo + stat readout ── */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 28px;
 }
 
-.about-body p:last-child {
-    margin-bottom: 0;
+@media (max-width:560px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-.about-body strong {
+.id-photo {
+    position: relative;
+    aspect-ratio: 3/4;
+    border: 1px solid var(--hud-dim);
+    background: #04060a;
+    overflow: hidden;
+}
+
+.id-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.25) contrast(1.05) brightness(0.95);
+}
+
+.id-photo::before {
+    /* one-shot scan sweep on load */
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -30%;
+    height: 30%;
+    background: linear-gradient(180deg, transparent, rgba(125, 255, 171, 0.35), transparent);
+    animation: scanSweep 1.6s ease-out .3s both;
+    pointer-events: none;
+}
+
+@keyframes scanSweep {
+    0% {
+        top: -30%;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+.id-photo-tag {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(5, 8, 10, 0.85);
+    border-top: 1px solid var(--hud-dim);
+    padding: 6px 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
     color: var(--hud);
-    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
 }
 
-/* ── readout block (callsign / status) ── */
+.id-corner {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: rgba(125, 255, 171, 0.5);
+    border-style: solid;
+    z-index: 2;
+}
+
+.id-corner.tl {
+    top: 5px;
+    left: 5px;
+    border-width: 1px 0 0 1px;
+}
+
+.id-corner.tr {
+    top: 5px;
+    right: 5px;
+    border-width: 1px 1px 0 0;
+}
+
+.id-corner.bl {
+    bottom: 24px;
+    left: 5px;
+    border-width: 0 0 1px 1px;
+}
+
+.id-corner.br {
+    bottom: 24px;
+    right: 5px;
+    border-width: 0 1px 1px 0;
+}
+
 .readout {
-    margin-top: 22px;
-    border-top: 1px solid var(--line);
-    padding-top: 18px;
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    gap: 11px;
 }
 
 .readout-row {
     display: flex;
     gap: 14px;
+    align-items: baseline;
     font-family: 'Share Tech Mono', monospace;
     font-size: 12.5px;
+    border-bottom: 1px solid rgba(125, 255, 171, 0.06);
+    padding-bottom: 9px;
+}
+
+.readout-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .readout-k {
     color: var(--hud-dim);
-    min-width: 130px;
+    min-width: 118px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+    flex-shrink: 0;
 }
 
 .readout-v {
@@ -215,74 +303,120 @@ body {
     }
 }
 
-/* ── credits table ── */
-.credits-table {
-    width: 100%;
-    border-collapse: collapse;
+/* ── field notes (bio) ── */
+.field-notes {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
     font-family: 'Share Tech Mono', monospace;
-    font-size: 12.5px;
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--text);
+    opacity: 0.9;
 }
 
-.credits-table tr {
-    border-bottom: 1px solid rgba(125, 255, 171, 0.06);
-    transition: background .2s ease;
+.field-notes p {
+    margin-bottom: 10px;
 }
 
-.credits-table tr:last-child {
-    border-bottom: none;
+.field-notes p:last-child {
+    margin-bottom: 0;
 }
 
-.credits-table tr:hover {
-    background: rgba(125, 255, 171, 0.03);
-}
-
-.credits-table td {
-    padding: 12px 8px;
-    letter-spacing: 0.03em;
-    vertical-align: top;
-}
-
-.credits-table td:first-child {
+.field-notes p::before {
+    content: '> ';
     color: var(--hud-dim);
-    white-space: nowrap;
-    padding-right: 22px;
-    font-size: 10.5px;
-    letter-spacing: 0.2em;
+}
+
+.field-notes strong {
+    color: var(--hud);
+    font-weight: 700;
+}
+
+.field-notes a {
+    color: var(--hud);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.field-notes a:hover {
+    text-shadow: 0 0 8px rgba(125, 255, 171, 0.6);
+}
+
+/* ── operational metrics (stat bars) ── */
+.metrics {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+}
+
+.metric-row {
+    margin-bottom: 16px;
+}
+
+.metric-row:last-child {
+    margin-bottom: 0;
+}
+
+.metric-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
     text-transform: uppercase;
-    padding-top: 14px;
+    margin-bottom: 6px;
 }
 
-.credits-table td:last-child {
-    font-family: 'Rajdhani', sans-serif;
-    color: var(--text);
-    font-size: 15px;
-}
-
-a.credit-name {
-    all: unset;
-    display: block;
-    color: var(--text);
-    font-weight: 600;
-    cursor: none;
-}
-
-a.credit-name:hover {
+.metric-label .metric-val {
     color: var(--hud);
 }
 
-.credit-sub {
-    display: block;
+.metric-track {
+    height: 7px;
+    border: 1px solid var(--hud-dim);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.metric-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--hud);
+    box-shadow: 0 0 8px rgba(125, 255, 171, 0.6);
+    transition: width 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.metric-fill.amber {
+    background: var(--amber);
+    box-shadow: 0 0 8px rgba(255, 180, 84, 0.6);
+}
+
+/* ── credits (kept quiet, single line) ── */
+.credits-line {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
     font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
     color: var(--muted);
-    font-size: 10.5px;
-    letter-spacing: 0.08em;
-    margin-top: 2px;
+    text-align: center;
+}
+
+.credits-line a {
+    color: var(--hud);
+    text-decoration: none;
+}
+
+.credits-line a:hover {
+    text-shadow: 0 0 8px rgba(125, 255, 171, 0.6);
 }
 
 /* ── back link ── */
 .about-back {
     text-align: center;
-    margin-top: 6px;
+    margin-top: 20px;
 }
 
 .about-back a {
@@ -312,7 +446,6 @@ a.credit-name:hover {
     transform: translateX(-4px);
 }
 
-/* ── footer ── */
 .about-footer {
     text-align: center;
     margin-top: 24px;
@@ -324,20 +457,11 @@ a.credit-name:hover {
 }
 
 @media (max-width:480px) {
-    body {
-        padding: 80px 14px 40px;
-    }
-
     .dossier-panel {
-        padding: 20px 18px 22px;
+        padding: 20px;
     }
 
-    .readout-row {
-        flex-direction: column;
-        gap: 2px;
-    }
-
-    .readout-k {
-        min-width: 0;
+    .about-wrap {
+        padding: 0 14px;
     }
 }
