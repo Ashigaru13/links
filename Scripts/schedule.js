@@ -27,9 +27,18 @@ const scheduleData = [
     platform: "twitch"
   },
   {
-    game: "WARDOGS",
+    game: "Warthunder",
     date: "2026-09-12",
     time: "00:00",
+    timezone: "SAST",
+    duration: 180,
+    note: "doing shit in warthunder :D",
+    platform: "twitch"
+  },
+  {
+    game: "WARDOGS",
+    date: "2026-09-12",
+    time: "01:00",
     timezone: "SAST",
     duration: 180,
     note: "making millions in WARDOGS :D",
