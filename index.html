@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORION // STANDBY</title>
+
+<link rel="icon" href="Images/icon.png" sizes="32x32" />
+<link rel="apple-touch-icon" href="Images/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Black+Ops+One&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="Styles/boot.css">
+
+<meta property="og:title" content="Orion">
+<meta property="og:description" content="Official Website For Orion.">
+<meta property="og:type" content="website">
+</head>
+<body>
+<div id="stage">
+  <canvas id="bgcanvas"></canvas>
+  <div class="grid-overlay"></div>
+
+  <div class="side-label side-label--left">ORION FIELD LOG ░ TERMINAL STANDBY</div>
+  <div class="side-label side-label--right">CLICK TO ESTABLISH UPLINK</div>
+
+  <div id="hud-top">
+    <div class="block">
+      <span class="k">CALLSIGN</span>
+      <span class="v">ORION</span>
+    </div>
+    <div class="block right">
+      <span class="k">OP. COLDVECTOR</span>
+      <span class="v amber" id="clockReadout">T+00:00:00</span>
+    </div>
+  </div>
+
+  <div id="centerstack">
+    <div id="opline">DEPLOYMENT PENDING</div>
+    <div id="title">STANDBY</div>
+    <div id="subline">AWAITING <span class="amber">CLEARANCE</span> TO PROCEED<span class="car">_</span></div>
+    <div id="entryCue">[ click anywhere to enter ]</div>
+  </div>
+
+  <div id="statusbar"><span class="statusdot"></span><span id="statusText">Comms Holding</span></div>
+  <div id="signal">SIGNAL <span class="bars" id="sigBars">▮▮▮▮▯</span></div>
+  <div id="stamp">CLASSIFIED · ORION-6</div>
+  <div id="footer">// ORION &nbsp;·&nbsp; FIELD FEED &nbsp;·&nbsp; 2026</div>
+
+  <div class="corner tl"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+  <div class="corner tr"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+  <div class="corner bl"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+  <div class="corner br"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+  <div id="cutOverlay"></div>
+</div>
+
+<script src="Scripts/boot.js"></script>
+</body>
+</html>

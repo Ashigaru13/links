@@ -1,0 +1,343 @@
+/* ============================================================
+   about.css — ORION field dossier
+   Extends Styles/style.css — tokens (--hud, --amber, --muted etc)
+   are inherited from there. Scrolling page, same pattern as
+   schedule.css.
+   ============================================================ */
+
+body {
+    display: block;
+    min-height: 100vh;
+    height: auto;
+    overflow: visible auto;
+    padding: 96px 20px 60px;
+}
+
+.about-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+/* ── header ── */
+.about-hero {
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.about-brandline {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    text-indent: 0.5em;
+    color: var(--hud);
+    text-shadow: 0 0 12px rgba(125, 255, 171, 0.5);
+    margin-bottom: 14px;
+}
+
+.about-title {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: clamp(38px, 7vw, 64px);
+    letter-spacing: 0.04em;
+    color: var(--text);
+    line-height: 1;
+    animation: titleGlow 3.2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 20px rgba(125, 255, 171, 0.32), 0 0 2px rgba(216, 245, 223, 0.4);
+    }
+
+    50% {
+        text-shadow: 0 0 54px rgba(125, 255, 171, 0.62), 0 0 2px rgba(216, 245, 223, 0.4);
+    }
+}
+
+.about-sub {
+    margin-top: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* ── dossier panel shell (shared by both panels on the page) ── */
+.dossier-panel {
+    max-width: 640px;
+    margin: 0 auto 22px;
+    background: rgba(6, 10, 8, 0.55);
+    border: 1px solid var(--line);
+    padding: 26px 26px 28px;
+    position: relative;
+}
+
+.dossier-bracket {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--hud-dim);
+    border-style: solid;
+    pointer-events: none;
+}
+
+.db-tl {
+    top: 8px;
+    left: 8px;
+    border-width: 1px 0 0 1px;
+}
+
+.db-tr {
+    top: 8px;
+    right: 8px;
+    border-width: 1px 1px 0 0;
+}
+
+.db-bl {
+    bottom: 8px;
+    left: 8px;
+    border-width: 0 0 1px 1px;
+}
+
+.db-br {
+    bottom: 8px;
+    right: 8px;
+    border-width: 0 1px 1px 0;
+}
+
+.dossier-screen {
+    animation: panelOn .5s ease both;
+}
+
+@keyframes panelOn {
+    0% {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-indent: 0.28em;
+    color: var(--hud-dim);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+}
+
+/* ── bio text ── */
+.about-body p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text);
+    opacity: 0.88;
+    margin-bottom: 13px;
+}
+
+.about-body p:last-child {
+    margin-bottom: 0;
+}
+
+.about-body strong {
+    color: var(--hud);
+    font-weight: 700;
+}
+
+/* ── readout block (callsign / status) ── */
+.readout {
+    margin-top: 22px;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.readout-row {
+    display: flex;
+    gap: 14px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12.5px;
+}
+
+.readout-k {
+    color: var(--hud-dim);
+    min-width: 130px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.readout-v {
+    color: var(--hud);
+}
+
+.readout-v.amber {
+    color: var(--amber);
+}
+
+.readout-v.dim {
+    color: var(--muted);
+}
+
+.status-live-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--hud);
+    box-shadow: 0 0 8px rgba(125, 255, 171, 0.8);
+    margin-right: 7px;
+    animation: statusBlink 2s ease-in-out infinite;
+}
+
+@keyframes statusBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.25;
+    }
+}
+
+/* ── credits table ── */
+.credits-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12.5px;
+}
+
+.credits-table tr {
+    border-bottom: 1px solid rgba(125, 255, 171, 0.06);
+    transition: background .2s ease;
+}
+
+.credits-table tr:last-child {
+    border-bottom: none;
+}
+
+.credits-table tr:hover {
+    background: rgba(125, 255, 171, 0.03);
+}
+
+.credits-table td {
+    padding: 12px 8px;
+    letter-spacing: 0.03em;
+    vertical-align: top;
+}
+
+.credits-table td:first-child {
+    color: var(--hud-dim);
+    white-space: nowrap;
+    padding-right: 22px;
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding-top: 14px;
+}
+
+.credits-table td:last-child {
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--text);
+    font-size: 15px;
+}
+
+a.credit-name {
+    all: unset;
+    display: block;
+    color: var(--text);
+    font-weight: 600;
+    cursor: none;
+}
+
+a.credit-name:hover {
+    color: var(--hud);
+}
+
+.credit-sub {
+    display: block;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--muted);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+}
+
+/* ── back link ── */
+.about-back {
+    text-align: center;
+    margin-top: 6px;
+}
+
+.about-back a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.24em;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color .2s ease;
+    padding: 8px 0;
+}
+
+.about-back a:hover {
+    color: var(--hud);
+}
+
+.about-back a::before {
+    content: '←';
+    transition: transform .2s ease;
+}
+
+.about-back a:hover::before {
+    transform: translateX(-4px);
+}
+
+/* ── footer ── */
+.about-footer {
+    text-align: center;
+    margin-top: 24px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.24em;
+    color: rgba(77, 110, 88, 0.55);
+    text-transform: uppercase;
+}
+
+@media (max-width:480px) {
+    body {
+        padding: 80px 14px 40px;
+    }
+
+    .dossier-panel {
+        padding: 20px 18px 22px;
+    }
+
+    .readout-row {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .readout-k {
+        min-width: 0;
+    }
+}

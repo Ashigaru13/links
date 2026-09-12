@@ -1,0 +1,84 @@
+<!--
+All Code Here Is Made By Kill3rKai
+See More Details At: Kill3rKai.ai/faq
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orion // Tactical Link Map</title>
+
+    <link rel="icon" href="Images/icon.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="Images/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Black+Ops+One&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="Styles/style.css">
+
+    <meta property="og:title" content="Orion">
+    <meta property="og:description" content="Official links and command hub for Orion.">
+    <meta property="og:url" content="https://orion1367.github.io/">
+    <meta property="og:type" content="website">
+</head>
+
+<body>
+
+    <div id="cursor"></div>
+    <div id="cursorRing"></div>
+
+    <div class="grid-overlay"></div>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+
+    <div class="side-label side-label--left">ORION FIELD LOG ░ ACTIVE PATROL ROUTE</div>
+    <div class="side-label side-label--right">SELECT A WAYPOINT TO PROCEED</div>
+
+    <div class="corner tl"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+    <div class="corner tr"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+    <div class="corner bl"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+    <div class="corner br"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+
+    <header class="hero">
+        <div id="hud-top">
+            <div class="block">
+                <span class="k">CALLSIGN</span>
+                <span class="v">ORION</span>
+            </div>
+            <div class="block right">
+                <span class="k">UPTIME</span>
+                <span class="v amber" id="clockReadout">T+00:00:00</span>
+            </div>
+        </div>
+
+        <div id="brandline">FIELD FEED</div>
+        <h1 id="title">ORION</h1>
+        <p id="subline">PATROL ROUTE ACTIVE<span class="blink">_</span></p>
+    </header>
+
+    <main class="map-section">
+        <div class="map-frame" id="mapFrame">
+            <canvas id="mapcanvas"></canvas>
+
+            <div id="wpReadout">
+                <div class="row"><span class="k">WAYPOINT</span><span class="v" id="rdWp">— — —</span></div>
+                <div class="row"><span class="k">STATUS</span><span class="v amber" id="rdStatus">AWAITING SELECT</span></div>
+                <div class="row"><span class="k">GRID REF</span><span class="v" id="rdGrid">— — —</span></div>
+            </div>
+
+            <div id="legend"><span class="dot"></span>Live channel patched through</div>
+
+            <!-- waypoints injected by main.js -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        // ORION &nbsp;·&nbsp; FIELD FEED &nbsp;·&nbsp; 2026
+    </footer>
+
+    <script src="Scripts/main.js"></script>
+</body>
+
+</html>

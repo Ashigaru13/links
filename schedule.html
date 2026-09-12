@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orion — Deployment Schedule</title>
+
+    <link rel="icon" href="Images/icon.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="Images/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Black+Ops+One&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="Styles/style.css">
+    <link rel="stylesheet" href="Styles/schedule.css">
+
+    <meta property="og:title" content="Orion — Deployment Schedule">
+    <meta property="og:description" content="Upcoming stream dates, ops and times.">
+    <meta property="og:type" content="website">
+</head>
+
+<body>
+
+    <div id="cursor"></div>
+    <div id="cursorRing"></div>
+
+    <canvas id="bgcanvas"></canvas>
+    <div class="grid-overlay"></div>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+
+    <div class="side-label side-label--left">ORION FIELD LOG ░ OPS CALENDAR</div>
+    <div class="side-label side-label--right">SELECT A DATE FOR SITREP</div>
+
+    <div class="corner tl"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+    <div class="corner tr"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+    <div class="corner bl"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+    <div class="corner br"><svg viewBox="0 0 76 76"><path d="M2 30 L2 2 L30 2" stroke="#7dffab" stroke-width="2" fill="none" opacity="0.55"/><path d="M2 46 L2 76" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/><path d="M46 2 L76 2" stroke="#7dffab" stroke-width="1" fill="none" opacity="0.22"/></svg></div>
+
+    <div class="sched-wrap">
+
+        <header class="sched-hero">
+            <div class="sched-brandline">FIELD FEED</div>
+            <h1 class="sched-title">Schedule</h1>
+            <p class="sched-sub">deployment calendar — Orion</p>
+        </header>
+
+        <div class="ticker" id="ticker">
+            <span class="ticker-prompt">&gt;</span>
+            <span class="ticker-text" id="ticker-text"></span><span class="ticker-cursor">_</span>
+        </div>
+
+        <div class="ops-panel">
+            <span class="ops-bracket ops-tl"></span>
+            <span class="ops-bracket ops-tr"></span>
+            <span class="ops-bracket ops-bl"></span>
+            <span class="ops-bracket ops-br"></span>
+
+            <div class="ops-label"><i class="fa-solid fa-satellite-dish"></i> ORION FIELD LOG // OPS CALENDAR</div>
+
+            <div class="ops-screen" id="ops-screen">
+
+                <div class="cal-header">
+                    <button class="cal-nav-btn" id="cal-prev" aria-label="Previous month">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div class="cal-title" id="cal-title">JULY 2026</div>
+                    <button class="cal-nav-btn" id="cal-next" aria-label="Next month">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="cal-weekdays">
+                    <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span>
+                    <span>THU</span><span>FRI</span><span>SAT</span>
+                </div>
+
+                <div class="cal-grid" id="cal-grid">
+                    <!-- filled by JS -->
+                </div>
+
+                <div class="cal-legend">
+                    <span class="legend-hint"><i class="fa-solid fa-arrow-pointer"></i> Click a day for full details</span>
+                    <a class="legend-link" href="https://twitch.tv/orion1367" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-twitch" style="color:#9146ff;"></i> Twitch
+                    </a>
+                </div>
+
+                <div class="cal-detail-backdrop" id="cal-detail-backdrop">
+                    <div class="cal-detail">
+                        <div class="cal-detail-head">
+                            <span id="cal-detail-date">—</span>
+                            <button class="cal-detail-close" id="cal-detail-close" aria-label="Close">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <div class="cal-detail-body" id="cal-detail-body">
+                            <!-- filled by JS -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="sched-footer">
+            // ORION &nbsp;·&nbsp; ALL RIGHTS RESERVED &nbsp;·&nbsp;
+            <a href="main.html">HOME</a>&nbsp;·&nbsp;2026
+        </footer>
+
+    </div>
+
+    <script src="Scripts/schedule.js" defer></script>
+
+</body>
+
+</html>

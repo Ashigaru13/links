@@ -1,0 +1,398 @@
+/* boot.css — ORION entry screen
+   Deliberately just his standby overlay doing double duty as the site's
+   front door: one title, one HUD readout, a slow radar sweep. No
+   fireworks — a click grants clearance and cuts to black. */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Black+Ops+One&family=Rajdhani:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg: #05080a;
+  --hud: #7dffab;
+  --hud-dim: #3d6b4d;
+  --amber: #ffb454;
+  --text: #d8f5df;
+  --muted: #4d6e58;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  overflow: hidden;
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--text);
+  cursor: pointer;
+}
+
+#stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  isolation: isolate;
+}
+
+canvas#bgcanvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(125, 255, 171, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 255, 171, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(125, 255, 171, 0.02) 3px, rgba(125, 255, 171, 0.02) 4px);
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  box-shadow: inset 0 0 300px 100px rgba(1, 2, 2, 0.86);
+}
+
+.corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  z-index: 7;
+}
+
+.corner svg {
+  width: 100%;
+  height: 100%;
+}
+
+.corner.tl {
+  top: 28px;
+  left: 28px;
+}
+
+.corner.tr {
+  top: 28px;
+  right: 28px;
+  transform: scaleX(-1);
+}
+
+.corner.bl {
+  bottom: 28px;
+  left: 28px;
+  transform: scaleY(-1);
+}
+
+.corner.br {
+  bottom: 28px;
+  right: 28px;
+  transform: scale(-1, -1);
+}
+
+.side-label {
+  position: absolute;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  opacity: 0.4;
+  z-index: 6;
+}
+
+.side-label--left {
+  left: 44px;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.side-label--right {
+  right: 44px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width:760px) {
+  .side-label {
+    display: none;
+  }
+}
+
+#hud-top {
+  position: absolute;
+  top: 48px;
+  left: 100px;
+  right: 100px;
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+#hud-top .block {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#hud-top .block.right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+#hud-top .k {
+  color: var(--hud-dim);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+
+#hud-top .v {
+  color: var(--hud);
+  font-size: 14px;
+}
+
+#hud-top .v.amber {
+  color: var(--amber);
+}
+
+@media (max-width:760px) {
+  #hud-top {
+    left: 28px;
+    right: 28px;
+    top: 28px;
+  }
+}
+
+#centerstack {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#opline {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 16px;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  color: var(--hud);
+  text-shadow: 0 0 12px rgba(125, 255, 171, 0.5);
+  margin-bottom: 22px;
+  transition: color .3s ease;
+}
+
+#title {
+  font-family: 'Black Ops One', sans-serif;
+  font-size: clamp(52px, 10vw, 108px);
+  letter-spacing: 0.05em;
+  color: var(--text);
+  line-height: 1;
+  animation: titleGlow 3.2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+
+  0%,
+  100% {
+    text-shadow: 0 0 20px rgba(125, 255, 171, 0.35), 0 0 2px rgba(216, 245, 223, 0.4);
+  }
+
+  50% {
+    text-shadow: 0 0 54px rgba(125, 255, 171, 0.65), 0 0 2px rgba(216, 245, 223, 0.4);
+  }
+}
+
+#subline {
+  margin-top: 24px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  color: var(--muted);
+  transition: color .3s ease;
+}
+
+#subline .amber {
+  color: var(--amber);
+}
+
+.car {
+  display: inline-block;
+  width: 9px;
+  color: var(--hud);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+#entryCue {
+  margin-top: 40px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: rgba(77, 110, 88, 0.55);
+  text-transform: uppercase;
+  animation: cueFade 2.6s ease-in-out infinite;
+}
+
+@keyframes cueFade {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+}
+
+#statusbar {
+  position: absolute;
+  left: 100px;
+  bottom: 96px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 15px;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.statusdot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--hud);
+  box-shadow: 0 0 10px rgba(125, 255, 171, 0.8);
+  animation: statusBlink 2s ease-in-out infinite;
+}
+
+@keyframes statusBlink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+}
+
+#signal {
+  position: absolute;
+  right: 100px;
+  bottom: 96px;
+  z-index: 4;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#signal .bars {
+  color: var(--hud);
+}
+
+#footer {
+  position: absolute;
+  left: 28px;
+  bottom: 32px;
+  z-index: 4;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;
+  color: rgba(77, 110, 88, 0.55);
+  text-transform: uppercase;
+}
+
+#stamp {
+  position: absolute;
+  right: 56px;
+  bottom: 56px;
+  z-index: 4;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: rgba(255, 180, 84, 0.3);
+  border: 1px solid rgba(255, 180, 84, 0.3);
+  padding: 5px 10px;
+  transform: rotate(-6deg);
+}
+
+@media (max-width:760px) {
+
+  #statusbar,
+  #signal {
+    left: 28px;
+    right: 28px;
+    bottom: 64px;
+  }
+
+  #signal {
+    left: auto;
+  }
+}
+
+/* cut to black on entry */
+#cutOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .8s ease;
+}
+
+#cutOverlay.active {
+  opacity: 1;
+}
