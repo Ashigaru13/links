@@ -18,68 +18,77 @@
 
 const scheduleData = [
   {
+    game: "Warthunder",
+    date: "2026-09-18",
+    time: "23:00",
+    timezone: "IST",
+    duration: 120,
+    note: "Warthunder Task Runs!",
+    platform: "twitch"
+  },
+  {
     game: "WARDOGS",
-    date: "2026-09-11",
-    time: "00:00",
-    timezone: "SAST",
-    duration: 180,
-    note: "making millions in WARDOGS :D",
+    date: "2026-09-18",
+    time: "03:00",
+    timezone: "IST",
+    duration: 120,
+    note: "WARDOGS WEEKEND!",
     platform: "twitch"
   },
   {
     game: "Warthunder",
-    date: "2026-09-12",
-    time: "00:00",
-    timezone: "SAST",
-    duration: 180,
-    note: "doing shit in warthunder :D",
+    date: "2026-09-19",
+    time: "23:00",
+    timezone: "IST",
+    duration: 120,
+    note: "Warthunder Task Runs!",
     platform: "twitch"
   },
   {
     game: "WARDOGS",
-    date: "2026-09-12",
-    time: "01:00",
-    timezone: "SAST",
-    duration: 180,
-    note: "making millions in WARDOGS :D",
-    platform: "twitch"
-  },
-  {
-    game: "TBD",
-    date: "2026-09-18",
-    time: "00:00",
-    timezone: "SAST",
-    duration: 180,
-    note: "TBD",
-    platform: "twitch"
-  },
-  {
-    game: "TBD",
     date: "2026-09-19",
-    time: "00:00",
+    time: "03:00",
     timezone: "SAST",
-    duration: 180,
+    duration: 120,
+    note: "WARDOGS WEEKEND!",
+    platform: "twitch"
+  },
+  {
+    game: "TBD",
+    date: "2026-09-25",
+    time: "23:00",
+    timezone: "SAST",
+    duration: 120,
     note: "TBD",
     platform: "twitch"
   },
   {
     game: "TBD",
     date: "2026-09-25",
-    time: "00:00",
+    time: "03:00",
     timezone: "SAST",
-    duration: 180,
+    duration: 120,
     note: "TBD",
     platform: "twitch"
   },
   {
     game: "TBD",
     date: "2026-09-26",
-    time: "00:00",
+    time: "23:00",
     timezone: "SAST",
-    duration: 180,
+    duration: 120,
     note: "TBD",
     platform: "twitch"
   },
+  {
+    game: "TBD",
+    date: "2026-09-26",
+    time: "03:00",
+    timezone: "SAST",
+    duration: 120,
+    note: "TBD",
+    platform: "twitch"
+  }
 ];
 
 // ── PAGE CHROME — cursor + ambient terrain/radar background ──
