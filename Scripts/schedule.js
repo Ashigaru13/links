@@ -20,7 +20,7 @@ const scheduleData = [
   {
     game: "Warthunder",
     date: "2026-09-18",
-    time: "23:00",
+    time: "00:00",
     timezone: "IST",
     duration: 120,
     note: "Warthunder Task Runs!",
@@ -29,7 +29,7 @@ const scheduleData = [
   {
     game: "WARDOGS",
     date: "2026-09-18",
-    time: "03:00",
+    time: "01:00",
     timezone: "IST",
     duration: 120,
     note: "WARDOGS WEEKEND!",
@@ -38,7 +38,7 @@ const scheduleData = [
   {
     game: "Warthunder",
     date: "2026-09-19",
-    time: "23:00",
+    time: "00:00",
     timezone: "IST",
     duration: 120,
     note: "Warthunder Task Runs!",
@@ -47,7 +47,7 @@ const scheduleData = [
   {
     game: "WARDOGS",
     date: "2026-09-19",
-    time: "03:00",
+    time: "01:00",
     timezone: "SAST",
     duration: 120,
     note: "WARDOGS WEEKEND!",
@@ -56,7 +56,7 @@ const scheduleData = [
   {
     game: "TBD",
     date: "2026-09-25",
-    time: "23:00",
+    time: "00:00",
     timezone: "SAST",
     duration: 120,
     note: "TBD",
@@ -65,7 +65,7 @@ const scheduleData = [
   {
     game: "TBD",
     date: "2026-09-25",
-    time: "03:00",
+    time: "01:00",
     timezone: "SAST",
     duration: 120,
     note: "TBD",
@@ -74,7 +74,7 @@ const scheduleData = [
   {
     game: "TBD",
     date: "2026-09-26",
-    time: "23:00",
+    time: "00:00",
     timezone: "SAST",
     duration: 120,
     note: "TBD",
@@ -83,7 +83,7 @@ const scheduleData = [
   {
     game: "TBD",
     date: "2026-09-26",
-    time: "03:00",
+    time: "01:00",
     timezone: "SAST",
     duration: 120,
     note: "TBD",
