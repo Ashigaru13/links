@@ -18,36 +18,18 @@
 
 const scheduleData = [
   {
-    game: "Warthunder",
-    date: "2026-09-18",
-    time: "00:00",
-    timezone: "IST",
-    duration: 120,
-    note: "Warthunder Task Runs!",
-    platform: "twitch"
-  },
-  {
     game: "WARDOGS",
     date: "2026-09-18",
-    time: "01:00",
+    time: "00:00",
     timezone: "IST",
     duration: 120,
     note: "WARDOGS WEEKEND!",
     platform: "twitch"
   },
   {
-    game: "Warthunder",
-    date: "2026-09-19",
-    time: "00:00",
-    timezone: "IST",
-    duration: 120,
-    note: "Warthunder Task Runs!",
-    platform: "twitch"
-  },
-  {
     game: "WARDOGS",
     date: "2026-09-19",
-    time: "01:00",
+    time: "00:00",
     timezone: "SAST",
     duration: 120,
     note: "WARDOGS WEEKEND!",
