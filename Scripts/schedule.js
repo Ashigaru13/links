@@ -36,41 +36,23 @@ const scheduleData = [
     platform: "twitch"
   },
   {
-    game: "TBD",
+    game: "BREAK DAY",
     date: "2026-09-25",
     time: "00:00",
     timezone: "SAST",
     duration: 120,
-    note: "TBD",
+    note: "no stream today",
     platform: "twitch"
   },
   {
-    game: "TBD",
-    date: "2026-09-25",
-    time: "01:00",
-    timezone: "SAST",
-    duration: 120,
-    note: "TBD",
-    platform: "twitch"
-  },
-  {
-    game: "TBD",
+    game: "WARDOGS",
     date: "2026-09-26",
     time: "00:00",
     timezone: "SAST",
     duration: 120,
-    note: "TBD",
+    note: "WARDOGS With Kill3rkai",
     platform: "twitch"
   },
-  {
-    game: "TBD",
-    date: "2026-09-26",
-    time: "01:00",
-    timezone: "SAST",
-    duration: 120,
-    note: "TBD",
-    platform: "twitch"
-  }
 ];
 
 // ── PAGE CHROME — cursor + ambient terrain/radar background ──
