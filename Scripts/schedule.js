@@ -45,12 +45,12 @@ const scheduleData = [
     platform: "twitch"
   },
   {
-    game: "WARDOGS",
+    game: "Minecraft",
     date: "2026-09-26",
     time: "00:00",
     timezone: "SAST",
     duration: 120,
-    note: "WARDOGS With Kill3rkai",
+    note: "Taking On Polarsi's Minecraft Challenge!",
     platform: "twitch"
   },
 ];
