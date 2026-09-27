@@ -53,6 +53,15 @@ const scheduleData = [
     note: "Taking On Polarsi's Minecraft Challenge!",
     platform: "twitch"
   },
+  {
+    game: "WARDOGS",
+    date: "2026-09-27",
+    time: "00:00",
+    timezone: "SAST",
+    duration: 120,
+    note: "WARDOGS WEEKEND SPECIAL!",
+    platform: "twitch"
+  },
 ];
 
 // ── PAGE CHROME — cursor + ambient terrain/radar background ──
