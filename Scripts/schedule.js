@@ -55,11 +55,20 @@ const scheduleData = [
   },
   {
     game: "WARDOGS",
-    date: "2026-09-27",
+    date: "2026-10-02",
     time: "00:00",
     timezone: "SAST",
     duration: 120,
-    note: "WARDOGS WEEKEND SPECIAL!",
+    note: "WARDOGS WEEKEND",
+    platform: "twitch"
+  },
+  {
+    game: "WARDOGS",
+    date: "2026-10-03",
+    time: "00:00",
+    timezone: "SAST",
+    duration: 120,
+    note: "WARDOGS WEEKEND",
     platform: "twitch"
   },
 ];
