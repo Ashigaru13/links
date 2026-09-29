@@ -71,6 +71,15 @@ const scheduleData = [
     note: "WARDOGS WEEKEND",
     platform: "twitch"
   },
+  {
+    game: "WARDOGS",
+    date: "2026-10-04",
+    time: "00:00",
+    timezone: "SAST",
+    duration: 120,
+    note: "WARDOGS WEEKEND",
+    platform: "twitch"
+  },
 ];
 
 // ── PAGE CHROME — cursor + ambient terrain/radar background ──
