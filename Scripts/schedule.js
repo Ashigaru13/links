@@ -71,6 +71,78 @@ const scheduleData = [
     note: "WARDOGS WEEKEND",
     platform: "twitch"
   },
+  {
+    game: "Arc Raiders",
+    date: "2026-10-09",
+    time: "00:00",
+    timezone: "SAST",
+    duration: 120,
+    note: "Arc Raiders Weekend",
+    platform: "twitch"
+  },
+  {
+    game: "Arc Raiders",
+    date: "2026-10-10",
+    time: "00:00",
+    timezone: "SAST",
+    duration: 120,
+    note: "Arc Raiders Weekend",
+    platform: "twitch"
+  },
+  {
+    game: "TBD",
+    date: "2026-10-16",
+    time: "00:00",
+    timezone: "SAST",
+    duration: 120,
+    note: "TBD",
+    platform: "twitch"
+  },
+  {
+    game: "TBD",
+    date: "2026-10-17",
+    time: "00:00",
+    timezone: "SAST",
+    duration: 120,
+    note: "TBD",
+    platform: "twitch"
+  },
+  {
+    game: "TBD",
+    date: "2026-10-23",
+    time: "00:00",
+    timezone: "SAST",
+    duration: 120,
+    note: "TBD",
+    platform: "twitch"
+  },
+  {
+    game: "TBD",
+    date: "2026-10-24",
+    time: "00:00",
+    timezone: "SAST",
+    duration: 120,
+    note: "TBD",
+    platform: "twitch"
+  },
+  {
+    game: "TBD",
+    date: "2026-10-30",
+    time: "00:00",
+    timezone: "SAST",
+    duration: 120,
+    note: "TBD",
+    platform: "twitch"
+  },
+  {
+    game: "TBD",
+    date: "2026-10-31",
+    time: "00:00",
+    timezone: "SAST",
+    duration: 120,
+    note: "TBD",
+    platform: "twitch"
+  },
 ];
 
 // ── PAGE CHROME — cursor + ambient terrain/radar background ──
