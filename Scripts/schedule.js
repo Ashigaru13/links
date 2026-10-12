@@ -90,39 +90,39 @@ const scheduleData = [
     platform: "twitch"
   },
   {
-    game: "TBD",
+    game: "Phasmophobia",
     date: "2026-10-16",
     time: "00:00",
     timezone: "SAST",
     duration: 120,
-    note: "TBD",
+    note: "Spooky Season!",
     platform: "twitch"
   },
   {
-    game: "TBD",
+    game: "Phasmophobia",
     date: "2026-10-17",
     time: "00:00",
     timezone: "SAST",
     duration: 120,
-    note: "TBD",
+    note: "Spooky Season!",
     platform: "twitch"
   },
   {
-    game: "TBD",
+    game: "Valorant",
     date: "2026-10-23",
     time: "00:00",
     timezone: "SAST",
     duration: 120,
-    note: "TBD",
+    note: "Valo Grind!",
     platform: "twitch"
   },
   {
-    game: "TBD",
+    game: "Valorant",
     date: "2026-10-24",
     time: "00:00",
     timezone: "SAST",
     duration: 120,
-    note: "TBD",
+    note: "Valo Grind!",
     platform: "twitch"
   },
   {
