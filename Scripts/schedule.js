@@ -189,21 +189,21 @@ const scheduleData = [
     platform: "twitch"
   },
   {
-    game: "Warthunder",
+    game: "Call Of Duty: Warzone",
     date: "2026-11-27",
     time: "00:00",
     timezone: "SAST",
     duration: 180,
-    note: "Warthunder Stream",
+    note: "Call Of Duty: Warzone Stream",
     platform: "twitch"
   },
   {
-    game: "Warthunder",
+    game: "Call Of Duty: Warzone",
     date: "2026-11-28",
     time: "00:00",
     timezone: "SAST",
     duration: 180,
-    note: "Warthunder Stream",
+    note: "Call Of Duty: Warzone Stream",
     platform: "twitch"
   },
   {
