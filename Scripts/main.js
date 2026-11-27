@@ -54,7 +54,7 @@ const waypoints = [
   { id: 'secrets', wp: 'WP.04', label: 'Classified Documents', grid: '47.44N 12.61E', status: 'NO SIGNAL', href: 'secrets.html', icon: 'fa-solid fa-lock', x: 76, y: 76 },
   { id: 'schedule', wp: 'WP.05', label: 'Schedule', grid: '47.38N 12.53E', status: 'ACTIVE', href: 'schedule.html', icon: 'fa-regular fa-calendar-days', x: 50, y: 87 },
   { id: 'about', wp: 'WP.06', label: 'About', grid: '47.33N 12.46E', status: 'ACTIVE', href: 'about.html', icon: 'fa-solid fa-circle-info', x: 24, y: 76 },
-  { id: 'instagram', wp: 'WP.07', label: 'Instagram', grid: '47.30N 12.41E', status: 'NO SIGNAL', href: '#', icon: 'fa-brands fa-instagram', x: 12, y: 52, disabled: true },
+  { id: 'instagram', wp: 'WP.07', label: 'Instagram', grid: '47.30N 12.41E', status: 'ACTIVE', href: 'https://www.instagram.com/orion1367.vt/', icon: 'fa-brands fa-instagram', x: 12, y: 52 },
   { id: 'merch', wp: 'WP.08', label: 'Merch', grid: '-- OFF GRID --', status: 'NO SIGNAL', href: '#', icon: 'fa-solid fa-store', x: 24, y: 27, disabled: true },
 ];
 
